@@ -1,5 +1,7 @@
 <template>
   <main class="main">
+    <preview class="main__preview" />
+
     <projects class="main__projects">
       <card
         :class="[
@@ -16,11 +18,13 @@
 </template>
 
 <script>
+import Preview from '@/components/Preview';
 import Projects from '@/components/Projects';
 import Card from '@/components/Card';
 
 export default {
   components: {
+    Preview,
     Projects,
     Card,
   },
@@ -36,6 +40,7 @@ export default {
 <style scoped>
 .main {
   margin: 0 auto;
+  position: relative;
 }
 
 .main__projects {
@@ -44,6 +49,7 @@ export default {
 
 .main__card {
   max-width: 50%;
+  margin: 300px 0;
 }
 
 .main__card_align_left {
