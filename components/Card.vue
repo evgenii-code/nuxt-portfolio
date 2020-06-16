@@ -4,7 +4,7 @@
 
     <vue-showdown class="card__description" :markdown="project.description" />
 
-    <div class="card__image-container">
+    <!-- <div class="card__image-container">
       <img
         class="card__image"
         :src="
@@ -12,7 +12,7 @@
         "
         :alt="`${project.name} preview`"
       />
-    </div>
+    </div> -->
   </section>
 </template>
 
@@ -22,6 +22,36 @@ export default {
     project: {
       type: Object,
     },
+  },
+
+  data() {
+    return {
+      observer: null,
+    };
+  },
+
+  mounted() {
+    const options = {
+      root: document.querySelector(
+        '.main__preview'
+      ) /* uses the Div element as root */,
+    };
+
+    this.observer = new IntersectionObserver(([entry], observer) => {
+      // console.dir(entry);
+
+      if (entry.isIntersecting) {
+        // this.$emit('showed');
+        this.$store.dispatch('preview/toggleAlign');
+        this.$store.dispatch('preview/defineImageUrl', {
+          payload: `https://www.master-7rqtwti-nrvhv2behmlpe.eu-4.platformsh.site${this.project.imageUrl.formats.medium.url}`,
+        });
+      }
+    });
+
+    this.observer.observe(this.$el);
+
+    // console.dir(this.observer)
   },
 };
 </script>
@@ -72,5 +102,9 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.fade {
+  transition: opacity 0.3s ease;
 }
 </style>
