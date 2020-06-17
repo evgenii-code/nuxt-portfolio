@@ -18,16 +18,16 @@
           </div>
         </div>
 
-        <transition name="fade">
-          <div class="preview__content">
+        <div class="preview__content">
+          <transition name="fade" mode="out-in">
             <img
               :src="imageUrl"
               :key="imageUrl"
               alt="Preview image"
               class="preview__image"
             />
-          </div>
-        </transition>
+          </transition>
+        </div>
       </div>
     </div>
   </div>
@@ -61,7 +61,7 @@ export default {
 .preview__container {
   width: 50%;
   position: relative;
-  transition: 0.3s;
+  transition: 0.8s cubic-bezier(0.36, 0.015, 0, 1.155);
 }
 
 .preview__container_align_left {
@@ -91,7 +91,7 @@ export default {
   box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: grid;
-  grid-template-rows: 10% 1fr;
+  grid-template-rows: 8% 1fr;
 }
 
 .preview__header {
@@ -136,11 +136,12 @@ export default {
 .preview__image {
   width: 100%;
   object-fit: cover;
+  opacity: 1;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.2s ease-out;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;

@@ -20,6 +20,13 @@ export const actions = {
     });
   },
 
+  changeAlign({ commit }, { payload }) {
+    commit('setState', {
+      name: 'alignToLeft',
+      value: payload,
+    });
+  },
+
   defineImageUrl({ commit }, { payload }) {
     commit('setState', {
       name: 'imageUrl',
