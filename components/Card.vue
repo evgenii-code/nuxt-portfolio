@@ -31,18 +31,17 @@ export default {
   },
 
   mounted() {
-    const options = {
-      root: document.querySelector(
-        '.main__preview'
-      ) /* uses the Div element as root */,
-    };
+    const regex = /(right)/g;
 
     this.observer = new IntersectionObserver(([entry], observer) => {
-      // console.dir(entry);
-
       if (entry.isIntersecting) {
-        // this.$emit('showed');
-        this.$store.dispatch('preview/toggleAlign');
+        const isEntryAlignedToTheRight = Array.from(
+          entry.target.classList
+        ).some(c => regex.test(c));
+
+        this.$store.dispatch('preview/changeAlign', {
+          payload: isEntryAlignedToTheRight,
+        });
         this.$store.dispatch('preview/defineImageUrl', {
           payload: `https://www.master-7rqtwti-nrvhv2behmlpe.eu-4.platformsh.site${this.project.imageUrl.formats.medium.url}`,
         });
@@ -50,8 +49,6 @@ export default {
     });
 
     this.observer.observe(this.$el);
-
-    // console.dir(this.observer)
   },
 };
 </script>
@@ -60,6 +57,8 @@ export default {
 .card {
   display: flex;
   flex-direction: column;
+  /* height: 110vh;
+  justify-content: center; */
 }
 
 .card__title {
