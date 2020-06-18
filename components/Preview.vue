@@ -9,7 +9,12 @@
         },
       ]"
     >
-      <div class="preview__window">
+      <a
+        class="preview__window"
+        :href="previewUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <div class="preview__header">
           <div class="preview__controls">
             <div class="prewiew__circle prewiew__circle_color_red"></div>
@@ -28,7 +33,7 @@
             />
           </transition>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -43,6 +48,10 @@ export default {
     imageUrl() {
       return this.$store.getters['preview/getImageUrl'];
     },
+
+    previewUrl() {
+      return this.$store.getters['preview/getPreviewUrl'];
+    },
   },
 };
 </script>
@@ -51,15 +60,16 @@ export default {
 .preview {
   position: fixed;
   top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   display: flex;
-  z-index: 2;
+  max-width: 1360px;
 }
 
 .preview__container {
-  width: 50%;
+  width: 40%;
+  max-width: 400px;
   position: relative;
   transition: 0.8s cubic-bezier(0.36, 0.015, 0, 1.155);
 }
@@ -88,10 +98,12 @@ export default {
   bottom: 0;
   right: 0;
   border-radius: 20px;
-  box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: grid;
   grid-template-rows: 8% 1fr;
+  z-index: 2;
 }
 
 .preview__header {
