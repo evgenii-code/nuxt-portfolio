@@ -1,12 +1,18 @@
 <template>
   <div class="default">
+    <my-header />
+
     <nuxt />
   </div>
 </template>
 
 <script>
+import Header from '@/components/Header';
+
 export default {
-  components: {},
+  components: {
+    'my-header': Header,
+  },
 
   async fetch() {
     await this.$store.dispatch('default/fetchData');

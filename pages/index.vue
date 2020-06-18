@@ -49,7 +49,12 @@ export default {
 
 .main__card {
   max-width: 50%;
-  margin: 300px 0;
+  margin: 40vh 0;
+  z-index: 1;
+}
+
+.main__card:first-of-type {
+  margin-top: 20vh;
 }
 
 .main__card_align_left {

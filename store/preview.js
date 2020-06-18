@@ -1,6 +1,7 @@
 export const state = () => ({
   alignToLeft: true,
   imageUrl: '',
+  previewUrl: '',
 });
 
 export const mutations = {
@@ -33,6 +34,13 @@ export const actions = {
       value: payload,
     });
   },
+
+  definePreviewUrl({ commit }, { payload }) {
+    commit('setState', {
+      name: 'previewUrl',
+      value: payload,
+    });
+  },
 };
 
 export const getters = {
@@ -42,5 +50,9 @@ export const getters = {
 
   getImageUrl(state) {
     return state.imageUrl;
+  },
+
+  getPreviewUrl(state) {
+    return state.previewUrl;
   },
 };
